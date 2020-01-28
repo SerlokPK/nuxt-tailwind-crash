@@ -1,56 +1,26 @@
 import axios from 'axios';
 
-const baseUri = 'www.base/api';
+export default {
+  request(method, uri, data = null, params = null, header = null) {
+    if (!method) {
+      console.error('API function call requires method argument');
+      return;
+    }
+    if (!uri) {
+      console.error('API function call requires uri argument');
+      return;
+    }
+    let headers = {};
+    if (process.browser) {
+      headers = {
+        Authorization: `JWT ${localStorage.token}`
+      };
+    }
 
-export function post(uri, data) {
-  return axios.post(`${baseUri}/${uri}`, data, {
-    headers: getHeaders(),
-    withCredentials: true
-  });
-}
-
-export function put(uri, data) {
-  return axios.put(`${baseUri}/${uri}`, data, {
-    headers: getHeaders(),
-    withCredentials: true
-  });
-}
-
-export function remove(uri) {
-  return axios.delete(`${baseUri}/${uri}`, {
-    headers: getHeaders(),
-    withCredentials: true
-  });
-}
-
-export function get(uri, data = {}) {
-  if (Object.keys(data).length > 0) {
-    uri = `${baseUri}/${uri}?${qs(data)}`;
+    if (header) {
+      Object.assign(headers, header);
+    }
+    const url = process.env.baseUri + uri;
+    return axios({ method, url, data, headers, params });
   }
-
-  return axios.get(uri, {
-    headers: getHeaders(),
-    withCredentials: true
-  });
-}
-
-function getHeaders() {
-  let headers = {
-    Accept: 'application/json'
-  };
-
-  if (localStorage.token) {
-    headers = {
-      Authorization: `JWT ${localStorage.token}`,
-      ...headers
-    };
-  }
-
-  return headers;
-}
-
-function qs(params) {
-  return Object.keys(params)
-    .map(k => esc(k) + '=' + esc(params[k]))
-    .join('&');
-}
+};
