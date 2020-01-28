@@ -1,12 +1,12 @@
 <template>
-  <div>Pocetni tekst</div>
+  <div>Some random about us text</div>
 </template>
 
 <script>
 export default {
   head() {
     return {
-      title: 'Home page'
+      title: 'About page'
     }
   }
 }
