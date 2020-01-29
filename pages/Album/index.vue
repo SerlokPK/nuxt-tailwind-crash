@@ -3,8 +3,7 @@
 </template>
 
 <script>
-import api from '@/services/api';
-
+import axios, { request } from '@/plugins/axios';
 export default {
   data() {
     return {
@@ -16,9 +15,11 @@ export default {
       title: 'Albums'
     };
   },
-  async created() {
+  async asyncData(ctx) {
     try {
-      this.albums = await api.request('get', '/albums');
+      console.log(ctx.app.$albumRepository);
+      //const albums = await ctx.app.$posts.get();
+      //console.log(albums);
     } catch (err) {
       console.log(err);
     }

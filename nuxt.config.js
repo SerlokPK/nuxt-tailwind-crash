@@ -24,14 +24,11 @@ export default {
    ** Global CSS
    */
   css: [],
-
-  env: {
-    baseUri: 'https://jsonplaceholder.typicode.com'
-  },
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  env: 'https://jsonplaceholder.typicode.com',
+  plugins: ['~/plugins/axios'],
   /*
    ** Nuxt.js dev-modules
    */
