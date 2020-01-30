@@ -1,5 +1,8 @@
 <template>
-  <div>dosao sam na albume</div>
+  <div>
+    dosao sam na albume
+    <button @click="getAlbums">Get albums</button>
+  </div>
 </template>
 
 <script>
@@ -15,13 +18,21 @@ export default {
       title: 'Albums'
     };
   },
-  async asyncData(ctx) {
+  async asyncData(context) {
     try {
-      console.log(ctx.app.$albumRepository);
-      //const albums = await ctx.app.$posts.get();
-      //console.log(albums);
+      const albums = await context.app.$repo.album.get();
+      console.log(albums);
+      console.log(albums[2]);
     } catch (err) {
       console.log(err);
+    }
+  },
+  methods: {
+    async getAlbums() {
+      const albums = await this.$repo.album.get();
+      const album = await this.$repo.album.get('/2');
+      console.log(albums);
+      console.log(album);
     }
   }
 };

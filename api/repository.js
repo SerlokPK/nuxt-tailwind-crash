@@ -1,5 +1,5 @@
 export default $axios => resource => ({
-  get(header, id) {
+  get(id, header) {
     // additional header settings
     if (id) {
       return $axios.$get(`${resource}/${id}`);

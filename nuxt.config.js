@@ -28,7 +28,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   env: 'https://jsonplaceholder.typicode.com',
-  plugins: ['~/plugins/axios'],
+  plugins: ['~/plugins/axios', '~/plugins/repository'],
   /*
    ** Nuxt.js dev-modules
    */
